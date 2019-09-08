@@ -8,7 +8,6 @@
 
 [Ruby on Rails チュートリアル](https://railstutorial.jp/)内にある
 ソースコードはMITライセンスとBeerwareライセンスのもとで公開されます。
-詳細は [LICENSE.md](LICENSE.md)をご覧ください。
 
 ## 使い方
 
