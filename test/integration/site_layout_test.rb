@@ -10,5 +10,11 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", about_path, text: "About"
     assert_select "a[href=?]", contact_path, text: "Contact"
     assert_select "h1", "Welcome to the Sample App"
+
+    get contact_path
+    assert_response :success
+
+    get signup_path
+    assert_response :success
   end
 end
