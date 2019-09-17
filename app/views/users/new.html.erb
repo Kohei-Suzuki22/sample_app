@@ -4,18 +4,20 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <%= render "shared/error_messages", obj: @user %>
+
     <%= form_with(model: @user, local: true) do |f| %>
       <%= f.label :name, for: "f_name" %>
-      <%= f.text_field :name, id:"f_name" %>
+      <%= f.text_field :name, id:"f_name", class: "form-control" %>
 
       <%= f.label :email, for: "f_email" %>
-      <%= f.email_field :email, id: "f_email" %>
+      <%= f.email_field :email, id: "f_email", class: "form-control"%>
 
       <%= f.label :password, for: "f_password" %>
-      <%= f.password_field :password, id: "f_password" %>
+      <%= f.password_field :password, id: "f_password", class: "form-control" %>
 
       <%= f.label :password_confirmation, "Confirmation", for: "f_confirmation" %>
-      <%= f.password_field :password_confirmation, id: "f_confirmation" %>
+      <%= f.password_field :password_confirmation, id: "f_confirmation", class: "form-control" %>
 
       <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>
