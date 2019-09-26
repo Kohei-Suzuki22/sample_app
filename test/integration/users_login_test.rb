@@ -48,6 +48,8 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     delete logout_path
     assert_not is_logged_in?
     assert_redirected_to root_url
+
+    delete logout_path
     follow_redirect!
     assert_template "static_pages/home"
     assert_select "a[href=?]", logout_path, count: 0
@@ -57,6 +59,8 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
       assert_select "a[href=?].dropdown-toggle", "#", count: 0
     end
     assert_select "a[href=?]", login_path
+
+
   end
 
 end
