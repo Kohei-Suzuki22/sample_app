@@ -11,7 +11,13 @@
       <%= f.label :password, for: "session_password" %>
       <%= f.password_field :password, id: "session_password", class: "form-control" %>
 
-      <%= f.submit "Log in", class: "btn btn-primary" %>
+      <%= f.label :remember_me, class: "checkbox inline" do %>
+        <%= f.check_box :remember_me, id:"session_remember_me", class: "remember_me" %>
+        <span class="remember_me">Remember me on this computer</span>
+      <% end %>
+
+
+      <%= f.submit "Log in", class: "submit-btn btn btn-primary" %>
     <% end %>
 
     <p>New User? <%= link_to "Sign up now!", signup_path %></p>
