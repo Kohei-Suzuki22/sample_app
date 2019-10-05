@@ -64,7 +64,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   end
 
   test "login with remembering" do
-    log_in_as(@user)
+    log_in_as(@user, remember_me: "1")
 
     # チュートリアルでは、テスト内では、cookiesメソッドにシンボルは使えないと
     # 書いていたが、cookies["remember_token"]ではなく、cookies[:remember_token]
@@ -72,12 +72,13 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
     # assert_not_empty cookies["remember_token"]　ではなく、以下でも可。
     assert_not_empty cookies[:remember_token]
+    assert_equal cookies[:remember_token], assigns(:user).remember_token
   end
 
   test "login without remembering" do
-    log_in_as(@user)
+    log_in_as(@user, remember_me: "1")
     delete logout_path
-    log_in_as(@user,remember_me: "0")
+    log_in_as(@user, remember_me: "0")
     assert_empty cookies[:remember_token]
   end
 
