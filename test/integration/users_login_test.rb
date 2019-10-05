@@ -48,6 +48,8 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     delete logout_path
     assert_not is_logged_in?
     assert_redirected_to root_url
+
+    delete logout_path
     follow_redirect!
     assert_template "static_pages/home"
     assert_select "a[href=?]", logout_path, count: 0
@@ -57,6 +59,27 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
       assert_select "a[href=?].dropdown-toggle", "#", count: 0
     end
     assert_select "a[href=?]", login_path
+
+
+  end
+
+  test "login with remembering" do
+    log_in_as(@user, remember_me: "1")
+
+    # チュートリアルでは、テスト内では、cookiesメソッドにシンボルは使えないと
+    # 書いていたが、cookies["remember_token"]ではなく、cookies[:remember_token]
+    # のように使うことが出来た。
+
+    # assert_not_empty cookies["remember_token"]　ではなく、以下でも可。
+    assert_not_empty cookies[:remember_token]
+    assert_equal cookies[:remember_token], assigns(:user).remember_token
+  end
+
+  test "login without remembering" do
+    log_in_as(@user, remember_me: "1")
+    delete logout_path
+    log_in_as(@user, remember_me: "0")
+    assert_empty cookies[:remember_token]
   end
 
 end
