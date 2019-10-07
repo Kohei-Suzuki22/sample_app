@@ -8,6 +8,11 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 
   test "unsuccessful edit" do
     get edit_user_path(@user)
+    assert_redirected_to(login_url)
+    follow_redirect!
+    assert_not flash.empty?
+    log_in_as(@user)
+    get edit_user_path(@user)
     assert_select "form[action='user_path(@user)']", count: 0
     assert_select "form[action='#{edit_user_path(@user)}']"
     assert_template "users/edit"
@@ -29,6 +34,11 @@ class UsersEditTest < ActionDispatch::IntegrationTest
   end
 
   test "successful edit" do
+    get edit_user_path(@user)
+    assert_redirected_to(login_url)
+    follow_redirect!
+    assert_not flash.empty?
+    log_in_as(@user)
     get edit_user_path(@user)
     assert_select "form[action='#{edit_user_path(@user)}']"
     assert_template "users/edit"
