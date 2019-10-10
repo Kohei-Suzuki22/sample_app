@@ -71,7 +71,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_equal edit_user_url(@user), session[:forwarding_url]
     log_in_as(@user)
     assert_redirected_to edit_user_url(@user)
-    assert_equal nil, session[:forwarding_url]
+    assert_nil session[:forwarding_url]
 
     name = "Foo Bar"
     email = "foo@bar.com"
@@ -92,7 +92,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_equal email, @user.email
 
     get login_path
-    assert_equal nil, session[:forwarding_url]
+    assert_nil session[:forwarding_url]
     log_in_as(@user)
     assert_redirected_to @user
 
