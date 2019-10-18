@@ -44,11 +44,11 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
 
     follow_redirect!
-    assert_template "users/show"
+    assert_template "static_pages/home"
     assert_not flash.empty?
-    assert flash[:success]
-    assert_select "div.alert.alert-success", "Welcome to the Sample App!"
-    assert is_logged_in?
+    assert flash[:info]
+    assert_select "div.alert.alert-info", "Please check your email to activate your account."
+    assert_not is_logged_in?
 
 
   end
