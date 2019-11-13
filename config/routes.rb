@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
 
@@ -18,5 +22,9 @@ Rails.application.routes.draw do
 
   resources :account_activations, only: [:edit]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
+  resources :password_resets, only: [:new, :create, :edit, :update]
+  post "/password_resets/new", to: "users#create"
+  put "/password_resets/new", to: "users#create"
+  post "/password_resets/:id/edit", to: "users#update"
+  put "/password_resets/:id/edit", to: "users#update"
 end
