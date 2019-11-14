@@ -26,4 +26,5 @@ Rails.application.routes.draw do
   post "/password_resets/new", to: "password_resets#create"
   post "/password_resets/:id/edit", to: "password_resets#update"
   put "/password_resets/:id/edit", to: "password_resets#update"
+  patch "/password_resets/:id/edit", to: "password_resets#update"
 end
