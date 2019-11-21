@@ -28,5 +28,6 @@ Rails.application.routes.draw do
   put "/password_resets/:id/edit", to: "password_resets#update"
   patch "/password_resets/:id/edit", to: "password_resets#update"
 
-  resources :microposts, only: [:create, :destroy]
+  resources :microposts, only: [:destroy]
+  post "/", to: "microposts#create"
 end
