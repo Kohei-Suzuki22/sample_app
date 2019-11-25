@@ -1,5 +1,5 @@
 <%= form_with(model: user, url: url, local: true) do |f| %>
-  <%= render "shared/error_messages", obj: user %>
+  <%= render "shared/error_messages", obj: f.object %>
 
   <%= f.label :name, for: "f_name" %>
   <%= f.text_field :name, id:"f_name", class: "form-control" %>
