@@ -36,13 +36,22 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", help_path, text: "Help"
     assert_select "a[href=?]", about_path, text: "About"
     assert_select "a[href=?]", contact_path, text: "Contact"
-    # assert_select "h1", "Welcome to the Sample App"
 
     assert_select "a[href=?]", users_path
     assert_select "a[href=?]", user_path(@user)
     assert_select "a[href=?]", edit_user_path(@user)
     assert_select "a[href=?]", logout_path
     assert_select "a[href=?]", login_path, count: 0
+
+    assert_select "a[href=?]", followings_user_path(@user) do
+      assert_select "strong#followings.stat", text: "#{@user.followings.count}"
+      assert_match "followings", response.body
+    end
+    assert_select "a[href=?]", followers_user_path(@user) do
+      assert_select "strong#followers.stat", text: "#{@user.followings.count}"
+      assert_match "followers", response.body
+    end
+
 
     get contact_path
     assert_response :success
