@@ -36,17 +36,24 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     get user_path(archer)
     assert_select "section.stats"
     assert_select "a[href=?]", followings_user_path(archer), count: 1 do
-      assert_select "strong#followings.stat", text: "#{@user.followings.count}"
+      # assert_select "strong#followings.stat", text: "#{@user.followings.count}"
       assert_match  "followings", response.body
     end
     assert_select "a[href=?]", followers_user_path(archer), count: 1 do
-      assert_select "strong#followers.stat", text: "#{@user.followers.count}"
+      # assert_select "strong#followers.stat", text: "#{@user.followers.count}"
       assert_match "followers", response.body
     end
     assert_template "users/show"
     assert_select "div#follow_form", count: 1
     assert_select "input[type=hidden][name=followed_id][value=?]", "#{archer.id}"
     assert_select "input[type=submit][value=?]", "Follow"
+
+    log_in_as(archer)
+    get user_path(@user)
+    assert_template "users/show"
+    assert_select "div#follow_form", count: 1
+    assert_select "input[type=hidden][value=?]", 'delete'
+    assert_select "input[type=submit][value=?]", "Unfollow"
 
   end
 
