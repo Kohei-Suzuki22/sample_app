@@ -24,11 +24,26 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+
+    reset_guest_profile if logged_in_as_guest?
+
     log_out if logged_in?
     redirect_to root_url
   end
 
   private
+
+  def logged_in_as_guest?
+    current_user == User.first
+  end
+
+  def reset_guest_profile
+
+    return unless logged_in_as_guest?
+
+    current_user.update(name: "Guest User", email: "example@railstutorial.org", password: "foobar", activated: true, activated_at: Time.zone.now)
+
+  end
 
   def session_params
     params.require(:session).permit(:email,:password,:remember_me)
