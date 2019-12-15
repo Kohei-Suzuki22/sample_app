@@ -36,3 +36,12 @@ $ rails server
 
 詳しくは、[*Ruby on Rails チュートリアル*](https://railstutorial.jp/)
 を参考にしてください。
+
+## オリジナル追加機能
+
+### ゲストとしてログイン機能
+
+「log in as guest」をクリックすると、ゲストユーザーとしてログインします。
+  機能を確認したい方は、ゲストとしてログイン機能を使ってみてください。
+  
+  ![rails_totorial_login_as_guest](https://user-images.githubusercontent.com/47558898/70856822-ed610c00-1f26-11ea-8e6c-6e37ae4425a4.PNG)
