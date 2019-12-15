@@ -5,7 +5,13 @@
       <a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
       sample application.
     </h2>
-    <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to "Sign up now!", signup_path, class: "sign_up btn btn-lg btn-primary" %><br>
+
+    <%= form_with(scope: :session, url: login_path, local: true) do |f| %>
+      <%= f.hidden_field :email, value: "example@railstutorial.org"  %>
+      <%= f.hidden_field :password, value: "foobar"  %>
+      <%= f.submit "Log in as guest", class: "guest_login submit-btn btn btn-success" %>
+    <% end %>
   </div>
 
   <%= link_to image_tag("rails.png", alt: "Rails logo"), "http://rubyonrails.org/" %>
